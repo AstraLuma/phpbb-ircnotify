@@ -1164,6 +1164,13 @@ function topic_review($topic_id, $forum_id, $mode = 'topic_review', $cur_post_id
 	return true;
 }
 
+
+function irc_notify($msg) {
+	$f = fopen('/tmp/dnd/chat.dftba.net/#dnd/in', 'a');
+	fwrite($f, $msg+"\n");
+	fclose($f);
+}
+
 /**
 * User Notification
 */
@@ -1173,6 +1180,8 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 
 	$topic_notification = ($mode == 'reply' || $mode == 'quote') ? true : false;
 	$forum_notification = ($mode == 'post') ? true : false;
+	
+	irc_notify("[$forum_name] $mode in $topic_title: $subject");
 
 	if (!$topic_notification && !$forum_notification)
 	{
