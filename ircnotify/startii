@@ -1,0 +1,19 @@
+#!/bin/sh
+
+NICK=DnD
+NICKSERV_PASS="foobar"
+SERVER=chat.dftba.net
+II_OPS="  -f \"DnD Notify Bot\""
+II_PATH=/tmp/dnd 
+
+
+
+ii -i $II_PATH -s $SERVER -n $NICK $II_OPS &
+echo $!
+
+sleep 5
+
+echo /mode DnD +B >> $II_PATH/$SERVER/in
+echo /j NickServ IDENTIFY $NICKSERV_PASS >> $II_PATH/$SERVER/in
+echo "/join #DnD-test" >> $II_PATH/$SERVER/in
+
