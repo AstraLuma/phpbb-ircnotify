@@ -1180,11 +1180,19 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 	$topic_notification = ($mode == 'reply' || $mode == 'quote') ? true : false;
 	$forum_notification = ($mode == 'post') ? true : false;
 	
-	irc_notify("[$forum_name] $mode in $topic_title: $subject");
-
+	
 	if (!$topic_notification && !$forum_notification)
 	{
 		trigger_error('NO_MODE');
+	}
+	
+	
+	// IRC Notifications
+	$url = generate_board_url()."/viewtopic.php?f=$forum_id&t=$topic_id&p=$post_id#p$post_id";
+	if ($topic_notification) {
+		irc_notify("Reply to $topic_title in $forum_name $url");
+	} else if ($forum_notification) {
+		irc_notify("New topic in $forum_name: $topic_title $url");
 	}
 
 	if (($topic_notification && !$config['allow_topic_notify']) || ($forum_notification && !$config['allow_forum_notify']))
