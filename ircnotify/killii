@@ -1,3 +1,4 @@
 #!/bin/sh
 
 killall ii
+rm -r /tmp/dnd

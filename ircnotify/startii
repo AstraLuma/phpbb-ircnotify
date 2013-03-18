@@ -7,7 +7,7 @@ II_OPS="  -f \"DnD Notify Bot\""
 II_PATH=/tmp/dnd 
 
 
-
+echo ii -i $II_PATH -s $SERVER -n $NICK $II_OPS
 ii -i $II_PATH -s $SERVER -n $NICK $II_OPS &
 echo $!
 

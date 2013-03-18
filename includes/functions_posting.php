@@ -1166,9 +1166,12 @@ function topic_review($topic_id, $forum_id, $mode = 'topic_review', $cur_post_id
 
 
 function irc_notify($msg) {
-	$f = fopen('/tmp/dnd/chat.dftba.net/#dnd/in', 'a');
+	$f = fopen('/tmp/dnd/chat.dftba.net/#dnd-test/in', 'w');
+//	print_r($f);
 	fwrite($f, $msg+"\n");
+	fflush($f);
 	fclose($f);
+//	echo $msg;
 }
 
 /**
