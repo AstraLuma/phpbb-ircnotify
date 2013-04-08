@@ -1164,7 +1164,6 @@ function topic_review($topic_id, $forum_id, $mode = 'topic_review', $cur_post_id
 	return true;
 }
 
-
 /**
 * User Notification
 */
@@ -1174,14 +1173,12 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 
 	$topic_notification = ($mode == 'reply' || $mode == 'quote') ? true : false;
 	$forum_notification = ($mode == 'post') ? true : false;
-	
-	
+
 	if (!$topic_notification && !$forum_notification)
 	{
 		trigger_error('NO_MODE');
 	}
-	
-	
+
 	// IRC Notifications
 	include_once($phpbb_root_path . 'ircnotify/notify.php');
 	if (function_exists('irc_notify')) {
