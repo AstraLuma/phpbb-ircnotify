@@ -1,4 +1,6 @@
 #!/bin/sh
 
-killall ii
-rm -r /tmp/dnd
+. `dirname $0`/iiconfig.sh
+
+kill `cat $IRC_ROOT/pid`
+rm -r $IRC_ROOT

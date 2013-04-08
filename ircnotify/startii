@@ -1,19 +1,14 @@
 #!/bin/sh
 
-NICK=DnD
-NICKSERV_PASS="foobar"
-SERVER=chat.dftba.net
-II_OPS="  -f \"DnD Notify Bot\""
-II_PATH=/tmp/dnd 
+. `dirname $0`/iiconfig.sh
 
-
-echo ii -i $II_PATH -s $SERVER -n $NICK $II_OPS
-ii -i $II_PATH -s $SERVER -n $NICK $II_OPS &
-echo $!
+ii -i $IRC_ROOT -s $IRC_SERVER -n $IRC_NICK $II_OPS &
+pid=$!
 
 sleep 5
 
-echo /mode DnD +B >> $II_PATH/$SERVER/in
-echo /j NickServ IDENTIFY $NICKSERV_PASS >> $II_PATH/$SERVER/in
-echo "/join #DnD-test" >> $II_PATH/$SERVER/in
+echo $pid > $IRC_ROOT/pid
+echo /mode $IRC_NICK +B >> $IRC_ROOT/$IRC_SERVER/in
+echo /j NickServ IDENTIFY $NICKSERV_PASS >> $IRC_ROOT/$IRC_SERVER/in
+echo /join $IRC_CHANNEL >> $IRC_ROOT/$IRC_SERVER/in
 

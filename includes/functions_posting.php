@@ -1165,11 +1165,6 @@ function topic_review($topic_id, $forum_id, $mode = 'topic_review', $cur_post_id
 }
 
 
-function irc_notify($msg) {
-	file_put_contents('/tmp/dnd/chat.dftba.net/#dnd-test/in', $msg."\n");
-#	file_put_contents('/tmp/dndmsgs', $msg."\n", FILE_APPEND);
-}
-
 /**
 * User Notification
 */
@@ -1188,11 +1183,16 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 	
 	
 	// IRC Notifications
-	$url = generate_board_url()."/viewtopic.php?f=$forum_id&t=$topic_id&p=$post_id#p$post_id";
-	if ($topic_notification) {
-		irc_notify("Reply to $topic_title in $forum_name $url");
-	} else if ($forum_notification) {
-		irc_notify("New topic in $forum_name: $topic_title $url");
+	include_once($phpbb_root_path . 'ircnotify/notify.php');
+	if (function_exists('irc_notify')) {
+		$url = generate_board_url()."/viewtopic.php?f=$forum_id&t=$topic_id&p=$post_id#p$post_id";
+		if ($topic_notification) {
+			irc_notify("Reply to $topic_title in $forum_name $url");
+		} else if ($forum_notification) {
+			irc_notify("New topic in $forum_name: $topic_title $url");
+		}
+	} else {
+		error_log("IRC notifications not configured.");
 	}
 
 	if (($topic_notification && !$config['allow_topic_notify']) || ($forum_notification && !$config['allow_forum_notify']))
