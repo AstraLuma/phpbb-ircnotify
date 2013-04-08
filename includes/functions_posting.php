@@ -1184,9 +1184,9 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 	if (function_exists('irc_notify')) {
 		$url = generate_board_url()."/viewtopic.php?f=$forum_id&t=$topic_id&p=$post_id#p$post_id";
 		if ($topic_notification) {
-			irc_notify("Reply to $topic_title in $forum_name $url");
+			irc_notify("reply", $forum_name, $topic_title, $url);
 		} else if ($forum_notification) {
-			irc_notify("New topic in $forum_name: $topic_title $url");
+			irc_notify("new", $forum_name, $topic_title, $url);
 		}
 	} else {
 		error_log("IRC notifications not configured.");
