@@ -4,6 +4,7 @@ define('IRC_ROOT', '/tmp/dnd');
 define('IRC_SERVER', 'chat.dftba.net');
 define('IRC_CHANNEL', '#dnd-test');
 
+global $IRC_IGNORE_FORUMS, $IRC_IGNORE_TOPICS;
 $IRC_IGNORE_FORUMS = array(); # Array of numeric forum IDs to omit from notifications
 $IRC_IGNORE_TOPICS = array(); # Array of numeric topic IDs to omit from notifications
 
