@@ -1182,7 +1182,7 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 	// IRC Notifications
 	include_once($phpbb_root_path . 'ircnotify/notify.php');
 	if (function_exists('irc_notify')) {
-		$url = generate_board_url()."/viewtopic.php?f=$forum_id&t=$topic_id&p=$post_id#p$post_id";
+		$url = generate_board_url()."/viewtopic.php?p=$post_id#p$post_id";
 		if ($topic_notification) {
 			irc_notify("reply", $forum_id, $forum_name, $topic_id, $topic_title, $post_id, $subject, $url);
 		} else if ($forum_notification) {

@@ -8,7 +8,7 @@ pid=$!
 sleep 5
 
 echo $pid > $IRC_ROOT/pid
-echo /mode $IRC_NICK +B >> $IRC_ROOT/$IRC_SERVER/in
+echo /mode $IRC_NICK +B-x >> $IRC_ROOT/$IRC_SERVER/in
 echo /j NickServ IDENTIFY $IRC_NICKSERV_PASS >> $IRC_ROOT/$IRC_SERVER/in
 echo /join $IRC_CHANNEL >> $IRC_ROOT/$IRC_SERVER/in
 
